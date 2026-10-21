@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Private page</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%92%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<style id="app-style">
+:root {
+  --blue: #1E5AA8;
+  --green: #1F8A5B;
+  --orange: #F07A1A;
+  --on-blue: #FFFFFF;
+  --on-green: #FFFFFF;
+  --on-orange: #1F2328;
+  --primary: var(--blue);
+  --on-primary: var(--on-blue);
+  --bg: #F5F7FA;
+  --surface: #FFFFFF;
+  --ink: #1F2328;
+  --muted: #56606B;
+  --line: #DCE2E9;
+  --accent-text: #1E5AA8;
+  --display: "Logo Code", "LogoCode", "Logo Code Regular", "Orbitron", "Arial Black", system-ui, sans-serif;
+  --text: "Lato", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --head-weight: 900;
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #13161B;
+    --surface: #1B2027;
+    --ink: #E8ECF1;
+    --muted: #A3ADB9;
+    --line: #2C333C;
+    --accent-text: #F07A1A;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #13161B;
+  --surface: #1B2027;
+  --ink: #E8ECF1;
+  --muted: #A3ADB9;
+  --line: #2C333C;
+  --accent-text: #F07A1A;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--text); font-size: 1.125rem; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+p { margin: 0; }
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; border-radius: 6px; }
+.wrap { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 8rem; }
+
+/* type scale */
+h1, h2, h3 { font-family: var(--display); margin: 0; color: var(--ink); }
+h1 { font-size: clamp(2.3rem, 8vw, 4.6rem); font-weight: var(--head-weight); line-height: 1.02; letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.45rem, 4.6vw, 2.2rem); font-weight: var(--head-weight); line-height: 1.1; }
+h3 { font-size: 1rem; font-weight: 700; line-height: 1.3; color: var(--accent-text); margin: 2rem 0 .4rem; }
+.kicker { font-weight: 300; font-style: italic; font-size: 1.15rem; color: var(--muted); margin-top: .4rem; }
+.sec-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 1rem; margin-bottom: 1.25rem; padding-bottom: .9rem; border-bottom: 4px solid var(--primary); }
+.sec-count { font-family: var(--display); font-weight: var(--head-weight); font-size: clamp(1.8rem, 6vw, 2.8rem); line-height: 1; color: var(--ink); text-align: right; }
+.sec-count small { display: block; font-family: var(--text); font-weight: 700; font-size: .85rem; color: var(--muted); margin-top: .3rem; }
+
+/* hero */
+.date { font-weight: 700; font-size: 1rem; color: var(--accent-text); margin-bottom: .9rem; }
+.intro { margin-top: 1.25rem; font-size: clamp(1.2rem, 3vw, 1.45rem); font-weight: 300; line-height: 1.45; max-width: 38rem; }
+.reminder { margin-top: 2rem; padding: 1.25rem 1.4rem 1.35rem; background: var(--blue); color: var(--on-blue); border-radius: 16px; }
+.reminder-label { display: block; font-weight: 700; font-size: .95rem; opacity: .9; }
+.reminder-text { display: block; margin-top: .25rem; font-weight: 900; font-size: clamp(1.3rem, 3.6vw, 1.7rem); line-height: 1.3; }
+.countdown { display: inline-block; margin-top: 1rem; padding: .35rem .9rem; border-radius: 999px; background: var(--orange); color: var(--on-orange); font-weight: 900; }
+
+section { margin-top: 4rem; }
+
+/* who I am */
+.identity { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.identity li { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .75rem; padding: 1rem 1rem 1rem 1.25rem; border-left: 6px solid var(--blue); background: var(--surface); border-radius: 0 14px 14px 0; font-weight: 900; font-size: clamp(1.15rem, 3vw, 1.4rem); line-height: 1.35; }
+
+/* notes */
+.notes { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; }
+.note { display: grid; grid-template-columns: 1fr auto; gap: .75rem; align-items: center; padding: 1.4rem 1.25rem 1.5rem 1.5rem; border-radius: 16px; background: var(--surface); border: 2px solid var(--line); }
+.note.promise { background: var(--green); color: var(--on-green); border-color: var(--green); }
+.note-tag { display: block; font-weight: 700; font-size: .95rem; margin-bottom: .35rem; }
+.note.promise .note-tag { opacity: .9; }
+.note-text { display: block; font-size: 1.2rem; font-weight: 700; line-height: 1.35; }
+.note.promise .note-text { font-family: var(--display); font-weight: var(--head-weight); font-size: clamp(1.35rem, 4.4vw, 2rem); line-height: 1.15; }
+.note.promise .del { color: var(--on-green); border-color: rgba(255,255,255,.55); }
+
+/* wins */
+.wins { list-style: none; margin: 0; padding: 0; }
+.wins li { display: grid; grid-template-columns: auto 1fr auto; align-items: start; gap: .85rem; padding: .85rem 0; border-bottom: 1px solid var(--line); font-size: 1.2rem; line-height: 1.4; }
+.mark { color: var(--green); font-size: 1rem; line-height: 1.7; }
+
+/* checklists */
+.goals { list-style: none; margin: 0; padding: 0; }
+.goal { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .5rem; padding: .6rem 0; border-bottom: 1px solid var(--line); }
+.goal label, .goal-main { display: flex; align-items: flex-start; gap: .85rem; line-height: 1.4; padding: .15rem 0; min-width: 0; }
+.goal label { cursor: pointer; }
+.goal input[type="checkbox"] { width: 1.4rem; height: 1.4rem; margin: .05rem 0 0; flex: none; cursor: pointer; accent-color: var(--orange); }
+.daily .goal input[type="checkbox"] { accent-color: var(--green); }
+.goal.done .goal-text { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--muted); }
+.towin { font: inherit; font-size: .85rem; font-weight: 700; padding: .3rem .8rem; border-radius: 999px; border: 2px solid var(--green); background: transparent; color: var(--ink); cursor: pointer; white-space: nowrap; }
+.towin:hover { background: var(--green); color: var(--on-green); }
+.won { font-size: .85rem; font-weight: 700; color: var(--muted); white-space: nowrap; }
+.bar { height: 12px; border-radius: 999px; background: var(--line); overflow: hidden; margin-bottom: .5rem; }
+.bar span { display: block; height: 100%; width: 0; border-radius: 999px; background: var(--orange); transition: width .45s ease; }
+.daily .bar span { background: var(--green); }
+
+/* joys */
+.joys { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .55rem; }
+.joys li { display: inline-flex; align-items: center; gap: .5rem; padding: .4rem 1rem; border: 2px solid var(--blue); border-radius: 999px; background: var(--surface); line-height: 1.3; font-weight: 700; }
+.joys li:nth-child(3n+2) { border-color: var(--green); }
+.joys li:nth-child(3n) { border-color: var(--orange); }
+.editing .joys li { padding-right: .4rem; }
+
+/* dream ticket */
+.ticket { margin-top: 2.5rem; position: relative; display: grid; grid-template-columns: 1fr auto; }
+.ticket::before, .ticket::after { content: ""; position: absolute; top: 50%; width: 26px; height: 26px; margin-top: -13px; border-radius: 50%; background: var(--bg); z-index: 1; }
+.ticket::before { left: -13px; }
+.ticket::after { right: -13px; }
+.ticket-main { background: var(--blue); color: var(--on-blue); padding: 1.6rem 1.75rem 1.7rem; border-radius: 18px 0 0 18px; min-width: 0; }
+.ticket-label { font-weight: 700; font-size: .95rem; opacity: .9; }
+.ticket-title { font-family: var(--display); font-weight: var(--head-weight); font-size: clamp(1.5rem, 6.2vw, 2.8rem); line-height: 1; margin-top: .35rem; overflow-wrap: anywhere; }
+.ticket-place { font-weight: 300; font-size: 1.3rem; margin-top: .2rem; }
+.ticket-tier { font-weight: 900; font-size: 1.1rem; margin-top: 1rem; }
+.ticket-sub { font-style: italic; font-weight: 300; margin-top: .15rem; }
+.ticket-stub { background: var(--orange); color: var(--on-orange); border-left: 2px dashed rgba(31,35,40,.55); padding: 1.5rem 1.6rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: .2rem; border-radius: 0 18px 18px 0; }
+.stub-label { font-weight: 700; font-size: .85rem; }
+.stub-tier { font-family: var(--display); font-weight: var(--head-weight); font-size: 1.55rem; line-height: 1.05; }
+.stub-admit { font-size: .85rem; font-weight: 700; margin-top: .2rem; }
+@media (max-width: 32rem) {
+  .ticket { grid-template-columns: 1fr; }
+  .ticket::before, .ticket::after { display: none; }
+  .ticket-main { border-radius: 18px 18px 0 0; }
+  .ticket-stub { border-left: 0; border-top: 2px dashed rgba(31,35,40,.55); border-radius: 0 0 18px 18px; flex-direction: row; justify-content: space-between; flex-wrap: wrap; padding: 1rem 1.75rem 1.15rem; text-align: left; }
+}
+.tiers { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .6rem; }
+.tier { font: inherit; width: 100%; text-align: left; display: grid; grid-template-columns: 1fr auto; gap: .2rem 1rem; align-items: start; padding: 1rem 1.2rem; border-radius: 14px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.tier:hover { border-color: var(--blue); }
+.tier[aria-pressed="true"] { border-color: var(--green); box-shadow: inset 6px 0 0 var(--green); }
+.tier-level { font-weight: 700; font-size: .9rem; color: var(--muted); }
+.tier-name { grid-column: 1; font-family: var(--display); font-weight: 700; font-size: 1.15rem; line-height: 1.2; }
+.tier-desc { grid-column: 1 / -1; color: var(--muted); }
+.tier-pick { grid-column: 2; grid-row: 1 / 3; align-self: center; font-weight: 900; font-size: .9rem; white-space: nowrap; }
+.tier[aria-pressed="true"] .tier-pick::before { content: "✓ "; color: var(--green); }
+
+/* edit mode */
+.edit-text { border-radius: 6px; outline: 2px dashed transparent; outline-offset: 3px; cursor: text; }
+.editing .edit-text { outline-color: color-mix(in srgb, var(--primary) 55%, transparent); }
+.editing .edit-text:focus { outline: 2px solid var(--orange); }
+.note.promise .edit-text, .reminder .edit-text { outline-color: rgba(255,255,255,.6); }
+.del { font: inherit; flex: none; font-size: .85rem; font-weight: 700; padding: .3rem .75rem; border-radius: 999px; border: 1.5px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; white-space: nowrap; }
+.del:hover { color: var(--ink); border-color: var(--ink); }
+.del.pending { color: var(--ink); border-color: var(--orange); background: color-mix(in srgb, var(--orange) 18%, transparent); }
+.add { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.add input, .add select { font: inherit; font-size: 1rem; min-height: 2.75rem; padding: 0 .85rem; border: 2px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); }
+.add input { flex: 1 1 14rem; min-width: 0; }
+.add input::placeholder { color: var(--muted); opacity: 1; }
+.add button { font: inherit; font-size: 1rem; font-weight: 900; min-height: 2.75rem; padding: 0 1.2rem; border: 0; border-radius: 10px; background: var(--primary); color: var(--on-primary); cursor: pointer; }
+
+.edit-fab { position: fixed; right: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); z-index: 20; font: inherit; font-weight: 900; font-size: 1rem; padding: .8rem 1.3rem; border-radius: 999px; border: 0; background: var(--primary); color: var(--on-primary); cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+.editbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--surface); border-top: 3px solid var(--primary); padding: .85rem 1rem calc(.85rem + env(safe-area-inset-bottom, 0px)); }
+.editbar-inner { max-width: 46rem; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; }
+.editbar-text { flex: 1 1 16rem; font-size: .95rem; line-height: 1.4; }
+.editbar-text strong { display: block; font-family: var(--display); font-weight: var(--head-weight); font-size: 1.05rem; }
+.editbar-text span { color: var(--muted); }
+.editbar-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.bar-btn { font: inherit; font-size: .95rem; font-weight: 700; min-height: 2.6rem; padding: 0 1rem; border-radius: 10px; border: 2px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; white-space: nowrap; }
+.bar-btn.main { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.bar-btn.pending { border-color: var(--orange); }
+
+/* make it yours */
+.style-panel { margin-top: 4rem; padding: 1.5rem; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); display: grid; gap: 1.25rem; }
+.style-panel h2 { font-size: 1.3rem; }
+.ctl-label { display: block; font-weight: 700; font-size: .95rem; color: var(--muted); margin-bottom: .45rem; }
+.swatches { display: flex; flex-wrap: wrap; gap: .6rem; }
+.swatch { font: inherit; display: inline-flex; align-items: center; gap: .6rem; padding: .4rem 1rem .4rem .4rem; border: 2px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--ink); font-weight: 700; cursor: pointer; }
+.swatch .dot { width: 1.8rem; height: 1.8rem; border-radius: 50%; }
+.swatch[aria-pressed="true"] { border-color: var(--ink); }
+.seg { display: inline-flex; border: 2px solid var(--line); border-radius: 10px; overflow: hidden; }
+.seg button { font: inherit; font-size: 1rem; border: 0; padding: .55rem 1rem; background: var(--bg); color: var(--ink); cursor: pointer; white-space: nowrap; }
+.seg button + button { border-left: 2px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); font-weight: 900; }
+.foot { margin-top: 2.5rem; font-size: .95rem; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
+
+/* lock screen */
+.lock { min-height: 78vh; max-width: 28rem; margin: 0 auto; display: grid; align-content: center; gap: 1.1rem; }
+.lock-icon { width: 3.5rem; height: 3.5rem; }
+.lock-title { font-size: clamp(1.9rem, 6.5vw, 2.7rem); font-weight: var(--head-weight); line-height: 1.08; }
+.lock-lede { font-size: 1.2rem; font-weight: 300; line-height: 1.45; }
+.lock-field { display: grid; gap: .35rem; }
+.lock-field span { font-weight: 700; font-size: .95rem; color: var(--muted); }
+.lock-field input { font: inherit; font-size: 1.15rem; min-height: 3.1rem; padding: 0 1rem; border: 2px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--ink); width: 100%; }
+.lock-field input:focus { border-color: var(--blue); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 35%, transparent); }
+.lock-show { display: flex; align-items: center; gap: .6rem; font-size: 1rem; cursor: pointer; }
+.lock-show input { width: 1.2rem; height: 1.2rem; accent-color: var(--blue); }
+.lock-hint { color: var(--muted); font-size: 1rem; line-height: 1.5; }
+.lock-btn { font: inherit; font-size: 1.1rem; font-weight: 900; min-height: 3.2rem; border: 0; border-radius: 12px; background: var(--blue); color: var(--on-blue); cursor: pointer; }
+.lock-btn[disabled] { opacity: .7; cursor: progress; }
+.lock-error { padding: .7rem .9rem; border-left: 5px solid var(--orange); border-radius: 0 10px 10px 0; background: color-mix(in srgb, var(--orange) 15%, transparent); font-weight: 700; }
+
+/* after setup */
+.banner { margin-bottom: 2.5rem; padding: 1.25rem 1.4rem; border-radius: 16px; background: var(--green); color: var(--on-green); display: grid; gap: .75rem; }
+.banner strong { font-family: var(--display); font-weight: var(--head-weight); font-size: 1.25rem; line-height: 1.2; }
+.banner button { justify-self: start; font: inherit; font-weight: 900; padding: .5rem 1.1rem; border-radius: 10px; border: 2px solid var(--on-green); background: transparent; color: var(--on-green); cursor: pointer; }
+
+/* floating buttons */
+.fab-row { position: fixed; right: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom, 0px)); z-index: 20; display: flex; gap: .5rem; }
+.fab-row .edit-fab { position: static; }
+.lock-fab { font: inherit; font-weight: 900; font-size: 1rem; padding: .8rem 1.2rem; border-radius: 999px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+
+/* password panel */
+.pw-panel { display: grid; gap: .75rem; }
+.pw-panel .lock-field input { min-height: 2.75rem; font-size: 1rem; }
+.pw-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.pw-msg { font-weight: 700; }
+</style>
+</head>
+<body>
+<main id="app" class="wrap"></main>
+<script type="application/json" id="app-vault">{"kdf":"PBKDF2-SHA256","iter":600000,"salt":"tIXFW7maHdtgz9ED8mBmSg==","iv":"dY+eWjXUPPnwHwRR","ct":"XorWuN9YaJzu8BQQ+0EEgvZ56qAoTb19khyMmtUF7nSFlVy21IrarSSjBv15DZASHeJ/rfwUtouxJWF8fd8Qdv/mYITGY/ZIGhtXRqCH4Xgx+FuA3t4cPvflnoQrd/pjqsmUAedDz5ovMVGZaZMCppl5mwlMWv5GoRvFu8o/p9kF5GpvkgH9iOgtRn9PD1jI6lY7E6CdMkTgv/zBHT6AHvne/l7kN2+HRIt1H47e8k6eu4zDWkYg3Dg9sxHfy/D4heReUdAT46XgDgD2zRTMRpcEQPcGpBYZ1n6QP4emQZJEGGUgdoi+JRvLvoXmYxkNUhH8iXkdUK73XdaU6rQqilUQGKL5YxYTO4z7fgJ3MuuJoSSLOgLnyZeSZjCADA8hHOxXNlB/LAVbM2QcZtSrQKZgn1Hs31zOGBUNGkQw/sUdJ8TPc49mEor+yOYVZ1sJW4K4lrGaH2kUW8Ja/wY6PbXcodxEZANiCN4dPJgfX2x4AaV2lvEE6PQgjiEB5tWjHSmKrB8+hlf1sL3KnzeiXgBJAxr8V5X0aGPr4YUop4xrQ7nZN5Vva3qHr5FzZeIkxieULtcMFavAJuhsUWmkyEPqbMLC6hpxRa34qVofOznur2pfqpEkzB6XxHUfjO3x4BsO4HfwetOnU/wg4EuUjmHDab/P/QLo538sZc1G1DEjLFGRIaUvydtdKTV3dZtWVeCMtpTCb05esZN4Rvv3fXzpYt5kgHiYhvdtEX8n5QHLPTQK3QCuhIg1z+3TviWb4oSX5hjxyihbjYFbPOMnppfYpLvsa50OdRBUjFEI0A476fhn8WAWM8FMKCJA70YR6weco5sP+2x057WgJRRwxSFt9Av7ASQIqP0YFUPOgnu6VTyRDmxMr18gLP9oumxI3GVP1DtyzlBHkP40veARlEDPVG+q/+7zeZ4EyU2vz1DcwaHVYS/VaKFV/uuUd2bzgV/lF44yRHwm53ULXy+kEBbiOk/bLjhgbn/hwJ2EnLUrOzM5uFoge2iShLyVtws6QZtE6lEohKk7yHKXUhXAggpDaz+v3lI0sy0UEgIWtSZbF4g1PRs+3xdzPZlDODqxZnTk8d+TPP89GNN4TFAUeCA+5/TkC2k6EJVZL7T0Lse1DFBpQtKkpZn4JU6y3mdjYRHpKDPC2a8OzyXmuIqHH4CisdkMtNslJ8su5uCv30YxejUpIswiD38UoUQ+GO8xfvOlOtGBuOKCB5IQBmB6IL0Nk3sw0pYXUuYqyffPzwOyf7xvnqNYquSrueGlAVVIjRs5t/BoXhAo9qpPzJLbW27isDQ/dipiwBcBJ7CeWnNa3tTorxTyPWq1Y8XhcDPbzYpNwUo87wogyIuUPFPs94LdfoR8/PMKR1BmgqLmlU1IYQWfnYTswWSljQ7NHVyhJuLkBT/D0am/lJwnyKpNlaiTIIDK19bvzAUn/4FscWbMKDmnycceAlfK/QKqvvmPjBLnn1FrJbj2sPaARfpBlhCRdhJgimtdjsWtsRtwGuTQXrUn/qVY4EyMDxaKO+bM5ZcSF4as+xjS4sltuFu8ub/CZ5HQzC/q+ulCgcers46Rp+mSAxw0Etr6hgzSclVgykKdaEC1zOkf+PiEO0KvnFTbr1tfGb/7hDAvSsN3f7aCeOwpxCYaJfTcRJAaBgGlpqrXY8n0w+TUNqrahZP107LxcHUNzLuHBL9w/cQdONYBkSeJ8aCbVpBkP5S30cFYfRnQiiWIUDDfV5PpjUPGQeYBHqapb5+z2GINlYso20FVJjUOKq1uXhLeSSgkczQZTbv5Q4ijRCjjzF7mz3YGnpJ7uCRSQZUoM5nMmQj1OZmZh8VHcxGUubRnOlh4KEyrHXiX08WqrmeVZMCw/IAEVqykPOPYHQJLS4ch9XO9ePECeYjmosxEzTFb8/sFm/dIT0eO3KlA30GxOWf2AgHI6+hBmYGmCGefdg1d2fqPKfkWF0ujlo5YX30E3veHEd2hdj/FeZRQjR+R2D7A4rzD1/Wvgq1oeRIQ7T1dXbmeMWmYkhUzver83AOny9jLOoG2pJ86pxOzungRmSJLcJxzvFWFhsUHsaNy7HEV8x4njW3L3puUJ6+vpy0WP2kDb2bjHADqSOSmhTBUR1yitXCssjMsWARc4l0xoIuBAWu1nTLvKSI+2fn7yzEeJ+yap59pEHvCvju4Lipw59Fv3Aiuuo9JKUwYyuu6pdRhQ8k+Vqm46/dX2SAPGgHJLhP1vRAQd5paj3aHZWU2fVH8BoNngxe+Yr2GI9368xG0efRJEaWld1srYNVpjtWydYYrxBpMav5elWHaQi1rMdlxyYD8bEqH7kP/ip9gSbyCAC3ixFgOC5NQeftp8ySBHICQ2/1fn/kJ80RlSugKXkEwOnowMRSfQLVp3UCy/PSV1w9LJ9GXFbpRNGe6+ZEKHuT5jGajVItZCteE4l0gjSzj5JPJp2U9wAFfW++qkTF3yuZMFEJmidLIO+nJfX4ryq3eevDpVBaXRzu90raTNLq4mzuj+IM7PQZkAKTJVhBW3NvZ9AuOy4MEBz9mAPlkLsBAcZrL5X7JnC1W80kliVZcHty1sKCxsDgTl6lqf6y66584NUh2Cft6lSkkITT2nAUWX/44lO5Kxi4Pt0/3GQixNO1F/P3r9RlNMePKApFSqdoweN0rV77W4UwigpDrGpwhB9NX+X21gIcBt2acg7FfYU1xOq8IZPR0PoEitg/22PWeXreLbhkycGQDcB7vB51Qw1LFpMHFtMOsBzRI+X6kmsioGlg97qZFupM/HCZEI1FHrUK0LAuMG//fQdmPj7oR7hSMHsHs8XIQioGj7BjMkbdrmZvoCcldI5PZggXBSVk/9eNhYC3+dichajgrroT1mw10WwXJwAYPN/wpCvMOIfCgNBSM5zr7PAgEYnZBqQoeyDHNlnOPUb3M8KxUkkg/ir8F9RhZ60UcpQXEN7xzU2+tEcdCk7eGJmli575JKteSGNRYLJ3lKFth9b1a+/qBjU1n22RVz7SgGWh+XiXQNTuWM50hpt9zw11pYtCskzZBUhqOVOVtkmySdgwchRDZGc9bYJ/UIYd8difUkO8Gbfo3nzCuV7EP3nc9+sVVEhpDGPgohJQ0FawtGsFMz2lWJuTA9kY/g0iq+/knB1hJxM6Rp0fisqAHgjd8a68SPxKEthSYgEesZNR8gcTefW+vzekgAEb7w1MvDsWDnaCtwvS4xxZQybIyu+hi0YPy/ztF4euLjTwjgjgBQexQm4phnHYXPeicM9awvKFm8nAHG/GJV63zc6rx9iwB4Rf1dJhVZ/rtMes1MxHjLLRX3qwCEc8V1KQKfb89vFwrflfTgDx7QZtjnw61mvNix5pe6Q8YQ0YpM45NuaXJBEnB6V7UUp6DQpJfD2g0+UvxV1qT+AP0A1f/Imh3RsTZZyx2oDCMGs3Zi6BNCFWZmbpx9NbWJcMwvbxkPpNm7Qm3jsTHBdCKlQHszYvcwOwrr2caBrYwHc68gH0ziKShDQ+JPXl0hBJE94MCZqa6ivnIYXeJI7XG0j/iISbgX1wY4d8o5J49akoEovJs9K43q4Asluw5F0gGO9ys4Y9NjAaorMdq8sqSR+GZan9myQvjl6Isfqb9/j2NDaXEtcNJlC+TqZITcOHubt8PzNbf2Ak07KfH/jct399Rij0WaFquK7SXB9cmPr+OGRaWG3IklPHzrfTbQz/K5NnEmtPNcAFzzY8TwLJokciu+bbbXVrzqwpMKgurEh7r/W0qKw9VNMDc+x9YhlF5b6V04wmr/pYQ2lho8yHVRvlSaCrRKZ7CSWnpgkW2Iux9HGGh8rWEgsyM8oEC2oA6a2ogMTgSifLxo0CyGfrY8iqVNOAWCtVEY6fdYAQzj5g8mKgyiyzZH0Zj3TT0D/pm9ekxO+Ab9lo1luHVsugUFWdmupnrT7TC0uHZ5XNQvGJ79eSs6SA6/1tneML38noWqWcvla4v9naLNLCOqyhwv4vO9R+Kgc2vnlcGLenQCCvIvw12zeF780+uUqXpz3JtDcS7IZOmAVXnSUzfdIqUg5Icl/GqkrILe7n1tRqvCLf3wFwNlZHKlo76WZngk6QpyqY7bo9BnSESFVurQqHquKJG/i8IxcVA7m/MSyEATV+5gq08NQCi6xdQY5tLYitEUPoAIy1saAifV336sF5WsyvC10IfG+K38a2VSEkW2vwXfvgGGOGdUYEhFBnkGXEcfs6ZdSoI3n+PKFVBiNOaby6jVBHsRz4AyB+Upjyhx31dn/0QjSDQbDhsM4jqQGmwlZdliN5O/USJtElbBsxzw3dH5oML4xzWXPnFT+FOs7AFF/2y6fxamz3yTyZ3CnON1GPRwpOo7SAmc7hWSr/++mwynXZNQUlFlmnVI7nw+qTT0LHlE1DvWFKXhP3MdrOiG2JWx0idXv1dgCma96NaqmBen3vdJV2dYEEU8M1yc/VMNZgB0wQTurUk3FglLMCZ/yeOKxm8U+tKTNJRiDi0Ht2JeOqHc25S8c9LBzkF9x+PO3WJg1f6tl2Qr1qJTLX2xvP819AHzfSnERTqOdYF190IXwqdFThx9HlrE0J7slpOxNwyHFKamWV6bdMA8l5wkbVvOahvi5TbzWzwDeA0dcS2L3qN/WcGxWOZH5aa+1HmM154Mm0RNLo1ueDI0km3LnlP7mRGG1rhSLG3oK6AxopoQG55xYHhjlGJI8xHTBrg1uz9gC5Q3c+4NP6mx7HOxXzn/67YDw3BHlKZf+qGHTdiypk2Qxu76WTfJlhTweYYF5XWJlACokV1y3XPNbp+08puppegRX7/f1CC2qU0xFl5PVs6O3mBDcBVRLuRzgc/TbnLNsQ4LSOcUaEVMWarRmtM4Y8TSJI7R/I6sFkU2VL25BkqHzi5Iu+kf12fKO+s+uWS48MYCo0qdshDGUe+GPHf78D6PFZi/R8cRhIWop7ZzyehY5BfVoAKFP2iO4lFfhocUiufMjyQ9ubycqoKR2fHvr0vyQQxfckiMhsu+7w1MI3Mj+STeI24D/Z9FaBenUewyzP/2a57VEUEWqaQjAUOqB26h3cTK0nDpRMKWHqIKofxEU0KI4x6Iyu6oMD/1CWTj+uJbT1jA5s6E5MDIxXZ3IPPFR/Esknw/1J4WMwbZQ46YG+0b/qvY8XuENwa4JQL31Map3/yAMGWV116ZQUlVmz6NSg+JkfLDWvSegnxvae7iatZy6NGSQ3mzNyeR41klG6mF515X3Wfwr4lbB+ampJMfUe6aaJ77tPmo+Dw4nZ2LNvAD03tPPukBkHJKEtOUKeihnl9wclUqQvwXbWWNYUlh8bhtkRUNkelOASmsNrhmg2DT79y6oaO4rh2oLE1fHAEduzLrf7nJsA9/S5z39JP9y3kPk1hMH98i1mRk6hxyDt+JRAZd9MH5gKfGrvuA48yBzwEArZFWDsYoqIMWnX7V8z/Wkwqzn1a5kECTtOQGDMA2YrUAyYJYHIyQWUEQq0a4f01ITV4kxcim+kY79WU46LaNnznzHdF/IMLaSb4+9jitqoAssBmH8WbloUMjrmLDN4cl+Y0AhTB7H5+zedMWLyALo3c0UMSPiiKcysBNyYoxZGMlLHt92K5SvFI34q5mil8JnNwkCnnJRvrroYp/UVXV9NIydcqcpgXl3hPNLMJ4TTFgGTtSVJ9gZZTPrCC0tYIt/MKQbuImjd2JLTbd3DBfR9z4D9yUJqptxCYyfLI2Ua6NRDqSj34EG0uSZJnvDiiGk/3eZ4+Y59NdK/q+bxizL8L8w+0UV8/kJJkU7ncgtD3Q1fGUQkPfLVJ76BKaVAJTEIvCipu4Cx+E5W6gZ/I4MU1Z+ccyC6OOA+uwJKuRtvrX6YegNCKYmhM+W3Z1FEUmWlIq3VQprtppwzHBRbG6rwZiXdRXPzC5ryBsBGtDLr52RA4z5tkzm5W9KPPbh6JPQ6PLN10B2axznjvXBYbjzJyOinDujwvQT9AVnyqKLW8N0h+zOnhTHdZxUoYRHHna/xMVstNCFMxj053dZmvtt2LxHG6Pjhvie57DsF8e/6zTpCZzRoLRicaa4mqTLVH8R9/HSnImrZCjvaOLrodJUZi8HuZoL0UY4d2kMKxDjG9WsxscJm7G1btrDYnsoA27YxAF9quHW5B4UgzYwYpD09MTJP/mdwqkEIhFnl7LVMu/yJHqFbOuXffS3h8Dmxnfofwjy+pJvEEfyecrhKc2j2YKbaGJFGorwhjZuvoDBzBPHRsbIFPPLf6Y2E6jngwx/fFLpXSte4m09wOGwizdMiNckTDj9g2NhZphrMuwUg8u5GW+bfWBeTxBQlpAPgKPEiKBsJyNYIlbB6ruku3swMz2MTG+H3LCXP1FDSm3EBUCUrYhsd2YtkioSKCKIIsT1Falaa2g1PFwWEvBCTYDadK7VXYFp8td3wZXZvZdccH+HAEemhLMePyyds+8NMC+JhU9WG1ZJ7VR/Xp7aGr3v2DJe2q4aUkrLX0I05nIrWMpj7wk2gWT9Rx9fOjZt1B8N/gq6X1Mva34AVXy+B3RueNQBifcFvqP384Or9VUa3v"}</script>
+<script id="app-script">
+(function () {
+  "use strict";
+  var STORE_KEY = "my-daily-list-locked";
+  var OLD_KEYS = ["my-daily-list", "my-daily-list-v1", "my-daily-list-drafts"];
+  var ITER = 600000;
+  var SC = "scr" + "ipt";
+  var HEAD = '<meta charset="utf-8">\n' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' +
+    '<meta name="robots" content="noindex, nofollow, noarchive">\n' +
+    '<title>Private page</title>\n' +
+    '<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ctext y=\'.9em\' font-size=\'90\'%3E%F0%9F%94%92%3C/text%3E%3C/svg%3E">\n' +
+    '<link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n' +
+    '<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">\n';
+  var ACCENTS = [["blue", "Blue", "#1E5AA8", "#FFFFFF"], ["green", "Green", "#1F8A5B", "#FFFFFF"], ["orange", "Orange", "#F07A1A", "#1F2328"]];
+  var WEIGHTS = [["500", "Regular"], ["700", "Bold"], ["900", "Heavy"]];
+  var LISTS = ["identity", "notes", "wins", "daily", "joys", "goals"];
+  var enc = new TextEncoder(), dec = new TextDecoder();
+  var cryptoOK = !!(window.crypto && window.crypto.subtle);
+
+  /* ---------- what this file contains ---------- */
+  var vault = null, setupState = null;
+  try { var ve = document.getElementById("app-vault"); if (ve) vault = JSON.parse(ve.textContent); } catch (e) { vault = null; }
+  try { var pe = document.getElementById("app-state"); if (!vault && pe) setupState = JSON.parse(pe.textContent); } catch (e) { setupState = null; }
+  var mode = vault ? "locked" : (setupState ? "setup" : "broken");
+
+  /* ---------- session (cleared on lock) ---------- */
+  var key = null, salt = null, state = null;
+  var embeddedState = null, embeddedKey = null, embeddedSalt = null, publishedNorm = null, pwChanged = false;
+  var editing = false, pendingRemove = null, pendingDiscard = false, saveTimer = null, saveSeq = 0;
+  var banner = "", lockError = "", pwOpen = false, pwMsg = "", pwError = "";
+
+  /* ---------- crypto ---------- */
+  function b64(buf) {
+    var a = new Uint8Array(buf), s = "";
+    for (var i = 0; i < a.length; i += 0x8000) s += String.fromCharCode.apply(null, a.subarray(i, i + 0x8000));
+    return btoa(s);
+  }
+  function unb64(s) {
+    var bin = atob(s), a = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) a[i] = bin.charCodeAt(i);
+    return a;
+  }
+  function randomB64(n) { return b64(crypto.getRandomValues(new Uint8Array(n))); }
+  async function deriveKey(pw, saltB64, iter) {
+    var base = await crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveKey"]);
+    return crypto.subtle.deriveKey({ name: "PBKDF2", salt: unb64(saltB64), iterations: iter || ITER, hash: "SHA-256" },
+      base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+  }
+  async function seal(obj) {
+    var iv = crypto.getRandomValues(new Uint8Array(12));
+    var ct = await crypto.subtle.encrypt({ name: "AES-GCM", iv: iv }, key, enc.encode(JSON.stringify(obj)));
+    return { kdf: "PBKDF2-SHA256", iter: ITER, salt: salt, iv: b64(iv), ct: b64(ct) };
+  }
+  async function open(k, v) {
+    var pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(v.iv) }, k, unb64(v.ct));
+    return JSON.parse(dec.decode(pt));
+  }
+
+  /* ---------- helpers ---------- */
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function fill(s) {
+    LISTS.forEach(function (k) { s[k] = s[k] || []; });
+    s.groups = s.groups || ["Other"];
+    s.style = s.style || { accent: "blue", weight: "900" };
+    s.copy = s.copy || {};
+    return s;
+  }
+  function normalize(s) {
+    var c = clone(s);
+    delete c.updatedAt;
+    (c.daily || []).forEach(function (d) { d.day = ""; });
+    return JSON.stringify(c);
+  }
+  function unsynced() { return pwChanged || publishedNorm === null || normalize(state) !== publishedNorm; }
+  function readLocal() { try { var r = localStorage.getItem(STORE_KEY); return r ? JSON.parse(r) : null; } catch (e) { return null; } }
+  function clearOldKeys() { OLD_KEYS.forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} }); }
+  function saveLocal() {
+    if (!key || !state) return;
+    var mine = ++saveSeq;
+    seal(state).then(function (v) {
+      if (mine !== saveSeq || !key) return;
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(v)); } catch (e) {}
+    });
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function uid() { return "x" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function todayLabel() {
+    try { return new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }); } catch (e) { return ""; }
+  }
+  function dayNumber() { var n = new Date(); return Math.floor(Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) / 86400000); }
+  function todayKey() { var n = new Date(); return n.getFullYear() + "-" + (n.getMonth() + 1) + "-" + n.getDate(); }
+  function halloweenLine() {
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    var n = Math.round((new Date(now.getFullYear(), 9, 31) - today) / 86400000);
+    if (n === 0) return "Happy Halloween!";
+    if (n === 1) return "Tomorrow is Halloween.";
+    if (n > 1 && n <= 45) return n + " nights until Halloween";
+    return "";
+  }
+  function applyStyle() {
+    var root = document.documentElement, st = (state && state.style) || { accent: "blue", weight: "900" }, a = ACCENTS[0];
+    ACCENTS.forEach(function (x) { if (x[0] === st.accent) a = x; });
+    root.style.setProperty("--primary", a[2]);
+    root.style.setProperty("--on-primary", a[3]);
+    root.style.setProperty("--head-weight", st.weight || "900");
+  }
+
+  /* ---------- lock screen ---------- */
+  var LOCK_SVG = '<svg class="lock-icon" viewBox="0 0 56 56" aria-hidden="true"><rect x="8" y="24" width="40" height="28" rx="7" fill="#1E5AA8"/>' +
+    '<path d="M17 24v-6a11 11 0 0 1 22 0v6" fill="none" stroke="#F07A1A" stroke-width="5" stroke-linecap="round"/><circle cx="28" cy="36" r="4" fill="#FFFFFF"/>' +
+    '<rect x="26.5" y="37" width="3" height="8" rx="1.5" fill="#FFFFFF"/></svg>';
+  function pwField(id, label, ac) {
+    return '<label class="lock-field" for="' + id + '"><span>' + label + '</span><input type="password" id="' + id + '" autocomplete="' + ac +
+      '" autocapitalize="off" spellcheck="false"></label>';
+  }
+  function showToggle(id) {
+    return '<label class="lock-show"><input type="checkbox" data-show="' + id + '"> Show password</label>';
+  }
+  function renderLock() {
+    document.title = "Private page";
+    document.body.classList.remove("editing");
+    applyStyle();
+    var app = document.getElementById("app"), h = '<div class="lock">' + LOCK_SVG;
+    if (!cryptoOK) {
+      h += '<h1 class="lock-title">This browser can’t open locked pages.</h1><p class="lock-lede">Open the link in Chrome, Safari, Edge or Firefox.</p>';
+    } else if (mode === "setup") {
+      h += '<h1 class="lock-title">Lock your page first.</h1>' +
+        '<p class="lock-lede">Create a password. Your page gets scrambled, so only someone with the password can read it, even on GitHub.</p>' +
+        pwField("pw1", "New password", "new-password") + pwField("pw2", "Type it again", "new-password") + showToggle("pw1,pw2") +
+        '<p class="lock-hint">Use 4 or more words you’ll remember, like a short sentence. Write it down somewhere safe. If you forget it, nobody can open the page, not even you.</p>' +
+        '<button type="button" class="lock-btn" id="lockGo" data-act="setup">Lock and download</button>';
+    } else if (mode === "locked") {
+      h += '<h1 class="lock-title">This page is private.</h1><p class="lock-lede">Enter the password to open it.</p>' +
+        pwField("pw", "Password", "current-password") + showToggle("pw") +
+        '<button type="button" class="lock-btn" id="lockGo" data-act="unlock">Unlock</button>';
+    } else {
+      h += '<h1 class="lock-title">This page can’t be opened.</h1><p class="lock-lede">The file looks damaged. Upload your last downloaded copy again.</p>';
+    }
+    if (lockError) h += '<p class="lock-error" role="alert">' + esc(lockError) + "</p>";
+    app.innerHTML = h + "</div>";
+    var first = app.querySelector("input[type=password]");
+    if (first) first.focus();
+  }
+  function busy(on, text) {
+    var b = document.getElementById("lockGo");
+    if (!b) return;
+    b.disabled = on;
+    b.textContent = text;
+  }
+
+  async function doUnlock() {
+    var input = document.getElementById("pw");
+    var pw = input ? input.value : "";
+    if (!pw) { lockError = "Type your password first."; renderLock(); return; }
+    busy(true, "Opening…");
+    var ok = null;
+    try {
+      var k = await deriveKey(pw, vault.salt, vault.iter);
+      var s = await open(k, vault);
+      ok = { k: k, salt: vault.salt, state: s };
+      embeddedState = clone(s); embeddedKey = k; embeddedSalt = vault.salt; publishedNorm = normalize(s);
+    } catch (e) { ok = null; }
+    var local = readLocal();
+    if (local && local.ct) {
+      try {
+        var lk = (ok && local.salt === ok.salt) ? ok.k : await deriveKey(pw, local.salt, local.iter);
+        var ls = await open(lk, local);
+        if (!ok || (ls.v === ok.state.v && (ls.updatedAt || 0) > (ok.state.updatedAt || 0))) {
+          if (!ok) publishedNorm = null;
+          if (local.salt !== vault.salt) pwChanged = true;
+          ok = { k: lk, salt: local.salt, state: ls };
+        }
+      } catch (e) {}
+    }
+    if (!ok) {
+      lockError = "That password didn’t work. Check it and try again.";
+      renderLock();
+      return;
+    }
+    key = ok.k; salt = ok.salt; state = fill(ok.state);
+    lockError = "";
+    clearOldKeys();
+    render({});
+  }
+
+  async function doSetup() {
+    var a = (document.getElementById("pw1") || {}).value || "";
+    var b = (document.getElementById("pw2") || {}).value || "";
+    if (a.length < 8) { lockError = "Use at least 8 characters. A short sentence works best."; renderLock(); return; }
+    if (a !== b) { lockError = "The two passwords don’t match. Type them again."; renderLock(); return; }
+    busy(true, "Locking…");
+    salt = randomB64(16);
+    key = await deriveKey(a, salt, ITER);
+    state = fill(clone(setupState));
+    state.updatedAt = Date.now();
+    clearOldKeys();
+    vault = await seal(state);
+    embeddedState = clone(state); embeddedKey = key; embeddedSalt = salt; publishedNorm = normalize(state); pwChanged = false;
+    mode = "locked";
+    await download();
+    saveLocal();
+    banner = "Your locked page downloaded as index.html. Upload that file to GitHub. Never upload this setup file.";
+    lockError = "";
+    render({});
+  }
+
+  function lockNow() {
+    key = null; salt = null; state = null; embeddedState = null; embeddedKey = null; embeddedSalt = null; publishedNorm = null;
+    editing = false; pendingRemove = null; pendingDiscard = false; pwOpen = false; pwMsg = ""; pwError = ""; banner = "";
+    saveSeq++;
+    renderLock();
+  }
+
+  async function changePassword() {
+    var a = (document.getElementById("np1") || {}).value || "";
+    var b = (document.getElementById("np2") || {}).value || "";
+    pwMsg = "";
+    if (a.length < 8) { pwError = "Use at least 8 characters. A short sentence works best."; render(); return; }
+    if (a !== b) { pwError = "The two passwords don’t match."; render(); return; }
+    pwError = "";
+    salt = randomB64(16);
+    key = await deriveKey(a, salt, ITER);
+    pwChanged = true;
+    vault = await seal(state);
+    state.updatedAt = Date.now();
+    saveLocal();
+    pwOpen = false;
+    pwMsg = "Password changed. Download the page and upload it to GitHub so the new password works there too.";
+    render();
+  }
+
+  /* ---------- the page ---------- */
+  function txt(list, id, text, cls) {
+    var c = cls ? cls + " " : "";
+    if (!editing) return '<span class="' + c.trim() + '">' + esc(text) + "</span>";
+    return '<span class="' + c + 'edit-text" contenteditable="true" spellcheck="true" role="textbox" aria-label="Edit text" data-edit-list="' +
+      list + '" data-edit-id="' + esc(id) + '" data-fk="edit:' + list + ":" + esc(id) + '">' + esc(text) + "</span>";
+  }
+  function del(list, item) {
+    if (!editing) return "";
+    var k = list + ":" + item.id, p = pendingRemove === k;
+    return '<button type="button" class="del' + (p ? " pending" : "") + '" data-act="rm" data-list="' + list + '" data-id="' + esc(item.id) +
+      '" data-fk="rm:' + esc(k) + '" aria-label="' + (p ? "Tap again to delete" : "Delete “" + esc(item.text) + "”") + '">' + (p ? "Tap to confirm" : "Delete") + "</button>";
+  }
+  function allGroups() {
+    var gs = state.groups.slice();
+    state.goals.forEach(function (g) { if (gs.indexOf(g.group) === -1) gs.push(g.group); });
+    if (!gs.length) gs.push("Other");
+    return gs;
+  }
+  function addRow(list, placeholder, label, withGroups) {
+    if (!editing) return "";
+    var h = '<div class="add"><input type="text" data-add="' + list + '" data-fk="input:' + list + '" placeholder="' + esc(placeholder) +
+      '" aria-label="' + esc(placeholder) + '" maxlength="200">';
+    if (withGroups) {
+      h += '<select data-group-select data-fk="select:' + list + '" aria-label="Group">';
+      allGroups().forEach(function (g) { h += '<option value="' + esc(g) + '">' + esc(g) + "</option>"; });
+      h += "</select>";
+    }
+    return h + '<button type="button" data-act="add" data-list="' + list + '" data-fk="addbtn:' + list + '">' + esc(label) + "</button></div>";
+  }
+  function secHead(id, title, kicker, count, countLabel) {
+    var h = '<div class="sec-head"><div><h2 id="' + id + '">' + esc(title) + "</h2>";
+    if (kicker) h += '<p class="kicker">' + esc(kicker) + "</p>";
+    h += "</div>";
+    if (count !== null && count !== undefined) h += '<p class="sec-count">' + esc(count) + "<small>" + esc(countLabel) + "</small></p>";
+    return h + "</div>";
+  }
+  function checkRow(list, item, on, extra) {
+    var act = list === "goals" ? "toggle" : "daily";
+    var box = '<input type="checkbox" data-act="' + act + '" data-id="' + esc(item.id) + '" data-fk="' + act + ":" + esc(item.id) + '"' + (on ? " checked" : "") +
+      (editing ? ' aria-label="' + esc(item.text) + '"' : "") + ">";
+    var main = editing ? '<div class="goal-main">' + box + txt(list, item.id, item.text, "goal-text") + "</div>"
+                       : "<label>" + box + txt(list, item.id, item.text, "goal-text") + "</label>";
+    return '<li class="goal' + (on ? " done" : "") + '">' + main + (extra || "<span></span>") + (editing ? del(list, item) : "<span></span>") + "</li>";
+  }
+  function captureDrafts() {
+    var d = {};
+    document.querySelectorAll("[data-add]").forEach(function (el) { d[el.getAttribute("data-add")] = el.value; });
+    var sel = document.querySelector("[data-group-select]");
+    if (sel) d._group = sel.value;
+    var a = document.activeElement;
+    if (a && a.getAttribute && a.getAttribute("data-fk")) d._focus = a.getAttribute("data-fk");
+    return d;
+  }
+  function applyDrafts(d) {
+    if (!d) return;
+    document.querySelectorAll("[data-add]").forEach(function (el) {
+      var v = d[el.getAttribute("data-add")];
+      if (typeof v === "string") el.value = v;
+    });
+    var sel = document.querySelector("[data-group-select]");
+    if (sel && d._group) sel.value = d._group;
+    if (d._focus) {
+      var f = document.querySelector('[data-fk="' + d._focus.replace(/"/g, '\\"') + '"]');
+      if (f) { try { f.focus({ preventScroll: true }); } catch (e) { f.focus(); } }
+    }
+  }
+  function syncText() {
+    return unsynced()
+      ? "Saved in this browser. To update your site, download the page and upload it to GitHub as index.html."
+      : "Everything matches the page on GitHub.";
+  }
+  function refreshSyncNote() { var el = document.getElementById("syncNote"); if (el) el.textContent = syncText(); }
+
+  function render(drafts) {
+    if (!state || !key) { renderLock(); return; }
+    var app = document.getElementById("app");
+    var d = drafts || captureDrafts();
+    document.title = "My daily list";
+    applyStyle();
+    document.body.classList.toggle("editing", editing);
+    var tk = todayKey(), wins = state.wins;
+    var reminder = wins.length ? wins[dayNumber() % wins.length].text : "";
+    var total = state.goals.length;
+    var done = state.goals.filter(function (g) { return g.done; }).length;
+    var dDone = state.daily.filter(function (x) { return x.day === tk; }).length;
+    var dream = state.dream || null;
+    var title = state.copy.title || "Look how far you’ve come.";
+    var intro = state.copy.intro || "";
+    var h = "";
+
+    if (banner) h += '<div class="banner" role="status"><strong>' + esc(banner) + '</strong><button type="button" data-act="banner-off">Got it</button></div>';
+
+    h += '<header class="hero">';
+    h += "<h1>" + txt("copy", "title", title, "") + "</h1>";
+    if (intro || editing) h += '<p class="intro">' + txt("copy", "intro", intro, "") + "</p>";
+    if (reminder) h += '<p class="reminder"><span class="reminder-label">Today’s reminder</span><span class="reminder-text">' + esc(reminder) + "</span></p>";
+    h += "</header>";
+
+    h += '<section aria-labelledby="me-h">' + secHead("me-h", "Who I am", "Say it out loud.", null) + '<ul class="identity">';
+    state.identity.forEach(function (it) { h += "<li>" + txt("identity", it.id, it.text, "") + del("identity", it) + "</li>"; });
+    h += "</ul>" + addRow("identity", "Add something true about you", "Add", false) + "</section>";
+
+    h += '<section aria-labelledby="notes-h">' + secHead("notes-h", "Notes to myself", "Promises I keep.", null) + '<ul class="notes">';
+    state.notes.forEach(function (n) {
+      h += '<li class="note' + (n.tag ? " promise" : "") + '"><p>' + (n.tag ? '<span class="note-tag">' + esc(n.tag) + "</span>" : "") +
+        txt("notes", n.id, n.text, "note-text") + "</p>" + del("notes", n) + "</li>";
+    });
+    h += "</ul>" + addRow("notes", "Add a note to yourself", "Add", false) + "</section>";
+
+    h += '<section aria-labelledby="wins-h">' + secHead("wins-h", "Things I’ve done", "Proof, every single day.", wins.length, wins.length === 1 ? "win" : "wins") + '<ul class="wins">';
+    wins.forEach(function (w) { h += '<li><span class="mark" aria-hidden="true">✦</span>' + txt("wins", w.id, w.text, "") + del("wins", w) + "</li>"; });
+    h += "</ul>" + addRow("wins", "Add something you’re proud of", "Add", false) + "</section>";
+
+    h += '<section class="daily" aria-labelledby="daily-h">' + secHead("daily-h", "Every day, I take care of me", "Starts fresh every morning.", dDone + "/" + state.daily.length, "today") +
+      '<div class="bar" aria-hidden="true"><span style="width:' + (state.daily.length ? Math.round(dDone / state.daily.length * 100) : 0) + '%"></span></div>' +
+      (state.daily.length && dDone === state.daily.length ? '<p class="kicker">All done today. Proud of you.</p>' : "") + '<ul class="goals">';
+    state.daily.forEach(function (x) { h += checkRow("daily", x, x.day === tk); });
+    h += "</ul>" + addRow("daily", "Add a daily habit", "Add", false) + "</section>";
+
+    h += '<section aria-labelledby="joys-h">' + secHead("joys-h", "Things that make me happy", "More of this, always.", null) + '<ul class="joys">';
+    state.joys.forEach(function (j) { h += "<li>" + txt("joys", j.id, j.text, "") + del("joys", j) + "</li>"; });
+    h += "</ul>" + addRow("joys", "Add something you love", "Add", false);
+    if (dream && dream.tiers && dream.tiers.length) {
+      var tier = dream.tiers[0];
+      dream.tiers.forEach(function (t) { if (t.key === state.dreamTier) tier = t; });
+      h += '<div class="ticket" role="group" aria-label="My dream: ' + esc(dream.title + " " + dream.place) + ", " + esc(tier.name) + '">' +
+        '<div class="ticket-main"><p class="ticket-label">My dream</p><p class="ticket-title">' + esc(dream.title) + '</p><p class="ticket-place">' + esc(dream.place) + "</p>" +
+        '<p class="ticket-tier">' + esc(tier.name) + '</p><p class="ticket-sub">' + esc(dream.sub) + "</p></div>" +
+        '<div class="ticket-stub"><span class="stub-label">My tier</span><span class="stub-tier">' + esc(tier.short) + '</span><span class="stub-admit">Admit one: me</span></div></div>';
+      h += '<h3>Pick my dream tier</h3><ul class="tiers">';
+      dream.tiers.forEach(function (t) {
+        var on = t.key === tier.key;
+        h += '<li><button type="button" class="tier" data-act="tier" data-id="' + esc(t.key) + '" data-fk="tier:' + esc(t.key) + '" aria-pressed="' + on + '">' +
+          '<span class="tier-level">' + esc(t.level) + '</span><span class="tier-name">' + esc(t.name) + '</span><span class="tier-pick">' +
+          (on ? "My dream tier" : "Choose") + '</span><span class="tier-desc">' + esc(t.desc) + "</span></button></li>";
+      });
+      h += "</ul>";
+    }
+    h += "</section>";
+
+    h += '<section aria-labelledby="goals-h">' + secHead("goals-h", "What I’m working on now", "One at a time.", done + "/" + total, total && done === total ? "all done!" : "done") +
+      '<div class="bar" role="progressbar" aria-label="Goals done" aria-valuemin="0" aria-valuemax="' + total + '" aria-valuenow="' + done +
+      '"><span style="width:' + (total ? Math.round(done / total * 100) : 0) + '%"></span></div>';
+    allGroups().forEach(function (group) {
+      var items = state.goals.filter(function (g) { return g.group === group; });
+      if (!items.length) return;
+      h += "<h3>" + esc(group) + '</h3><ul class="goals">';
+      items.forEach(function (g) {
+        var extra = "<span></span>";
+        if (g.done && !g.won) extra = '<button type="button" class="towin" data-act="win" data-id="' + esc(g.id) + '" data-fk="win:' + esc(g.id) + '">Add to my wins</button>';
+        else if (g.won) extra = '<span class="won">✦ In my wins</span>';
+        h += checkRow("goals", g, g.done, extra);
+      });
+      h += "</ul>";
+    });
+    h += addRow("goals", "Add a goal", "Add goal", true) + "</section>";
+
+    if (editing) {
+      h += '<div class="style-panel"><h2>Make it yours</h2><div><span class="ctl-label" id="accent-l">Button and line color</span><div class="swatches" role="group" aria-labelledby="accent-l">';
+      ACCENTS.forEach(function (a) {
+        h += '<button type="button" class="swatch" data-act="accent" data-id="' + a[0] + '" data-fk="accent:' + a[0] + '" aria-pressed="' + (state.style.accent === a[0]) +
+          '"><span class="dot" style="background:' + a[2] + '"></span>' + a[1] + "</button>";
+      });
+      h += '</div></div><div><span class="ctl-label" id="weight-l">Headline weight</span><div class="seg" role="group" aria-labelledby="weight-l">';
+      WEIGHTS.forEach(function (w) {
+        h += '<button type="button" data-act="weight" data-id="' + w[0] + '" data-fk="weight:' + w[0] + '" aria-pressed="' + (state.style.weight === w[0]) + '">' + w[1] + "</button>";
+      });
+      h += '</div></div><div class="pw-panel"><span class="ctl-label">Password</span>';
+      if (pwOpen) {
+        h += pwField("np1", "New password", "new-password") + pwField("np2", "Type it again", "new-password") + showToggle("np1,np2") +
+          (pwError ? '<p class="lock-error" role="alert">' + esc(pwError) + "</p>" : "") +
+          '<div class="pw-actions"><button type="button" class="bar-btn main" data-act="pw-save">Save new password</button>' +
+          '<button type="button" class="bar-btn" data-act="pw-cancel">Cancel</button></div>';
+      } else {
+        h += (pwMsg ? '<p class="pw-msg" role="status">' + esc(pwMsg) + "</p>" : "") +
+          '<div class="pw-actions"><button type="button" class="bar-btn" data-act="pw-open" data-fk="pw-open">Change password</button></div>';
+      }
+      h += "</div></div>";
+    }
+    h += '<p class="foot">' + (editing ? "Tap any outlined text to change it." : "Tap Edit page to change anything. Tap Lock when you’re done.") + "</p>";
+
+    if (editing) {
+      h += '<div class="editbar" role="region" aria-label="Edit mode"><div class="editbar-inner"><p class="editbar-text"><strong>Edit mode</strong><span id="syncNote">' +
+        esc(syncText()) + '</span></p><div class="editbar-actions">' +
+        '<button type="button" class="bar-btn" data-act="download" data-fk="download">Download page</button>' +
+        (embeddedState && unsynced() ? '<button type="button" class="bar-btn' + (pendingDiscard ? " pending" : "") + '" data-act="discard" data-fk="discard">' +
+          (pendingDiscard ? "Tap to confirm" : "Undo my changes") + "</button>" : "") +
+        '<button type="button" class="bar-btn main" data-act="edit-off" data-fk="edit-off">Done</button></div></div></div>';
+    } else {
+      h += '<div class="fab-row"><button type="button" class="lock-fab" data-act="lock" data-fk="lock">Lock</button>' +
+        '<button type="button" class="edit-fab" data-act="edit-on" data-fk="edit-on">Edit page</button></div>';
+    }
+    app.innerHTML = h;
+    applyDrafts(d);
+  }
+
+  function commit(d) { state.updatedAt = Date.now(); saveLocal(); render(d); }
+  function findIn(list, id) {
+    for (var i = 0; i < state[list].length; i++) if (state[list][i].id === id) return state[list][i];
+    return null;
+  }
+
+  async function download() {
+    var v = await seal(state);
+    var css = document.getElementById("app-style").textContent;
+    var js = document.getElementById("app-script").textContent;
+    var doc = "<!doctype html>\n<html lang=\"en\">\n<head>\n" + HEAD + '<style id="app-style">' + css + "</style>\n</head>\n<body>\n" +
+      '<main id="app" class="wrap"></main>\n' +
+      "<" + SC + ' type="application/json" id="app-vault">' + JSON.stringify(v) + "</" + SC + ">\n" +
+      "<" + SC + ' id="app-script">' + js + "</" + SC + ">\n</body>\n</html>\n";
+    var blob = new Blob([doc], { type: "text/html" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "index.html";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+  }
+
+  function addFrom(list) {
+    var input = document.querySelector('[data-add="' + list + '"]');
+    if (!input) return;
+    var text = input.value.trim();
+    if (!text) { input.focus(); return; }
+    if (list === "goals") {
+      var sel = document.querySelector("[data-group-select]");
+      state.goals.push({ id: uid(), text: text, group: sel ? sel.value : allGroups()[0], done: false, won: false });
+    } else if (list === "daily") {
+      state.daily.push({ id: uid(), text: text, day: "" });
+    } else {
+      state[list].push({ id: uid(), text: text });
+    }
+    input.value = "";
+    var d = captureDrafts();
+    d._focus = "input:" + list;
+    commit(d);
+  }
+
+  /* ---------- live text editing ---------- */
+  function setText(el, text) {
+    var list = el.getAttribute("data-edit-list"), id = el.getAttribute("data-edit-id");
+    if (list === "copy") state.copy[id] = text;
+    else { var it = findIn(list, id); if (it) it.text = text; }
+  }
+  document.addEventListener("input", function (ev) {
+    var t = ev.target;
+    if (!state || !t.hasAttribute || !t.hasAttribute("data-edit-list")) return;
+    setText(t, t.textContent.replace(/\s+/g, " ").trim());
+    state.updatedAt = Date.now();
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () { saveLocal(); refreshSyncNote(); }, 500);
+  });
+  document.addEventListener("focusin", function (ev) {
+    var t = ev.target;
+    if (t.hasAttribute && t.hasAttribute("data-edit-list")) t.setAttribute("data-orig", t.textContent);
+  });
+  document.addEventListener("focusout", function (ev) {
+    var t = ev.target;
+    if (!state || !t.hasAttribute || !t.hasAttribute("data-edit-list")) return;
+    var clean = t.textContent.replace(/\s+/g, " ").trim();
+    var allowEmpty = t.getAttribute("data-edit-list") === "copy" && t.getAttribute("data-edit-id") === "intro";
+    if (!clean && !allowEmpty) { clean = t.getAttribute("data-orig") || ""; t.textContent = clean; }
+    setText(t, clean);
+    clearTimeout(saveTimer);
+    saveLocal();
+    refreshSyncNote();
+  });
+  document.addEventListener("paste", function (ev) {
+    var t = ev.target;
+    if (!t.closest || !t.closest("[data-edit-list]")) return;
+    ev.preventDefault();
+    var text = (ev.clipboardData || window.clipboardData).getData("text").replace(/\s+/g, " ");
+    try { document.execCommand("insertText", false, text); } catch (e) {}
+  });
+
+  /* ---------- clicks and keys ---------- */
+  document.addEventListener("click", function (ev) {
+    var t = ev.target.closest ? ev.target.closest("[data-act]") : null;
+    var act = t && t.getAttribute("data-act");
+    if (act === "unlock") { doUnlock(); return; }
+    if (act === "setup") { doSetup(); return; }
+    if (!state) return;
+    var changed = false;
+    if (act !== "rm" && pendingRemove) { pendingRemove = null; changed = true; }
+    if (act !== "discard" && pendingDiscard) { pendingDiscard = false; changed = true; }
+    if (!t || act === "toggle" || act === "daily") { if (changed) render(); return; }
+    var id = t.getAttribute("data-id"), list = t.getAttribute("data-list");
+    if (act === "rm") {
+      var k = list + ":" + id;
+      if (pendingRemove === k) {
+        pendingRemove = null;
+        state[list] = state[list].filter(function (x) { return x.id !== id; });
+        commit();
+      } else { pendingRemove = k; render(); }
+    } else if (act === "win") {
+      var g = findIn("goals", id);
+      if (!g) return;
+      g.won = true;
+      state.wins.push({ id: uid(), text: "Done: " + g.text });
+      commit();
+    } else if (act === "add") { addFrom(list); }
+    else if (act === "tier") { state.dreamTier = id; commit(); }
+    else if (act === "accent") { state.style.accent = id; commit(); }
+    else if (act === "weight") { state.style.weight = id; commit(); }
+    else if (act === "edit-on") { editing = true; render(); }
+    else if (act === "edit-off") { editing = false; pwOpen = false; render(); }
+    else if (act === "lock") { lockNow(); }
+    else if (act === "banner-off") { banner = ""; render(); }
+    else if (act === "download") { download(); }
+    else if (act === "pw-open") { pwOpen = true; pwMsg = ""; pwError = ""; render(); var f = document.getElementById("np1"); if (f) f.focus(); }
+    else if (act === "pw-cancel") { pwOpen = false; pwError = ""; render(); }
+    else if (act === "pw-save") { changePassword(); }
+    else if (act === "discard") {
+      if (!pendingDiscard) { pendingDiscard = true; render(); return; }
+      pendingDiscard = false;
+      try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+      if (embeddedState) {
+        state = fill(clone(embeddedState));
+        key = embeddedKey; salt = embeddedSalt; pwChanged = false; pwMsg = "";
+      }
+      render();
+    }
+  });
+
+  document.addEventListener("change", function (ev) {
+    var t = ev.target;
+    if (t && t.hasAttribute && t.hasAttribute("data-show")) {
+      t.getAttribute("data-show").split(",").forEach(function (id) {
+        var f = document.getElementById(id);
+        if (f) f.type = t.checked ? "text" : "password";
+      });
+      return;
+    }
+    if (!state) return;
+    var act = t && t.getAttribute && t.getAttribute("data-act");
+    if (act === "toggle") {
+      var g = findIn("goals", t.getAttribute("data-id"));
+      if (g) { g.done = t.checked; commit(); }
+    } else if (act === "daily") {
+      var x = findIn("daily", t.getAttribute("data-id"));
+      if (x) { x.day = t.checked ? todayKey() : ""; commit(); }
+    }
+  });
+
+  document.addEventListener("keydown", function (ev) {
+    var t = ev.target;
+    if (ev.key === "Enter" && t && t.type === "password" || (ev.key === "Enter" && t && t.id && /^(pw|pw1|pw2|np1|np2)$/.test(t.id))) {
+      ev.preventDefault();
+      if (t.id === "pw") doUnlock();
+      else if (t.id === "pw1" || t.id === "pw2") doSetup();
+      else changePassword();
+      return;
+    }
+    if (t && t.hasAttribute && t.hasAttribute("data-edit-list")) {
+      if (ev.key === "Enter") { ev.preventDefault(); t.blur(); }
+      else if (ev.key === "Escape") { t.textContent = t.getAttribute("data-orig") || t.textContent; t.blur(); }
+      return;
+    }
+    if (ev.key === "Enter" && t && t.getAttribute && t.getAttribute("data-add")) { ev.preventDefault(); addFrom(t.getAttribute("data-add")); }
+    if (ev.key === "Escape" && (pendingRemove || pendingDiscard)) { pendingRemove = null; pendingDiscard = false; render(); }
+  });
+
+  renderLock();
+})();
+</script>
+</body>
+</html>
