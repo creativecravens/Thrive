@@ -243,6 +243,12 @@ h2 .h-fl { width: .8em; height: 1em; margin-right: .35em; vertical-align: -0.08e
 .flock .flamingo:nth-child(2) { width: 3.4rem; height: 4.25rem; transform: scaleX(-1); }
 .flock .flamingo:nth-child(3) { width: 2rem; height: 2.5rem; }
 @media (prefers-reduced-motion: reduce) { .hero-fl { animation: none; } }
+
+/* page links */
+.site-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.5rem; }
+.site-nav a { display: inline-flex; align-items: center; min-height: 2.75rem; padding: .4rem 1rem; border-radius: 999px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 700; font-size: .95rem; line-height: 1.2; text-decoration: none; }
+.site-nav a:hover { border-color: var(--primary); }
+.site-nav a[aria-current="page"] { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
 </style>
 </head>
 <body>
@@ -270,6 +276,14 @@ h2 .h-fl { width: .8em; height: 1em; margin-right: .35em; vertical-align: -0.08e
   var FLAMINGO_SVG = '<svg viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg" focusable="false"><path d="M24 60 L24 77 M20 77 L28 77" stroke="#F7709F" stroke-width="2.4" stroke-linecap="round" fill="none"/><path d="M26 60 L33 66 L25 69" stroke="#F7709F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M8 46 C8 36 22 32 32 36 C40 39 44 46 40 53 C36 60 22 62 14 56 C10 53 8 50 8 46 Z M4 44 L12 46 L8 52 Z" fill="#F7709F"/><path d="M14 44 C20 40 30 41 34 47 C28 50 20 51 14 44 Z" fill="#FFFFFF" fill-opacity=".35"/><path d="M37 40 C46 32 46 24 40 18 C35 13 36 6 43 5" stroke="#F7709F" stroke-width="5" stroke-linecap="round" fill="none"/><circle cx="45" cy="7" r="5" fill="#F7709F"/><path d="M48 5 C54 4 58 7 57 13 C55 11 52 10 49 11 Z" fill="#F7709F"/><path d="M55.5 9.5 C57.5 11 57.6 13 57 15 C56 13.3 55 12.5 54 12 Z" fill="#1F2328"/><circle cx="45.5" cy="6" r="1.2" fill="#1F2328"/></svg>';
   function flamingo(cls) { return '<span class="flamingo ' + (cls || "") + '" aria-hidden="true">' + FLAMINGO_SVG + "</span>"; }
   var cryptoOK = !!(window.crypto && window.crypto.subtle);
+  var PAGES = [["index.html", "My daily list"], ["reports.html", "Reports for Mayra"]];
+  function siteNav(current) {
+    var h = '<nav class="site-nav" aria-label="My pages">';
+    PAGES.forEach(function (p) {
+      h += '<a href="' + p[0] + '"' + (p[0] === current ? ' aria-current="page"' : "") + ">" + esc(p[1]) + "</a>";
+    });
+    return h + "</nav>";
+  }
 
   /* ---------- what this file contains ---------- */
   var vault = null, setupState = null;
@@ -577,7 +591,7 @@ h2 .h-fl { width: .8em; height: 1em; margin-right: .35em; vertical-align: -0.08e
     var dream = state.dream || null;
     var title = state.copy.title || "Look how far you’ve come.";
     var intro = state.copy.intro || "";
-    var h = "";
+    var h = siteNav("index.html");
 
     if (banner) h += '<div class="banner" role="status"><strong>' + esc(banner) + '</strong><button type="button" data-act="banner-off">Got it</button></div>';
 
